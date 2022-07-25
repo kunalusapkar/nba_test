@@ -1,16 +1,14 @@
 const express = require('express')
 const app = express()
 const playerRoute = require('./players/route')
+const config = require('./config.json')
 
 
-const server = app.listen(3000,()=>{
-    console.log(" App is running")
+const server = app.listen(config.port,()=>{
+    console.log(`App is running on port ${config.port}`)
 })
 
-app.get('/',(req,res)=>{
-    res.send("My first express project")
-})
 
-app.use('/api/v1',playerRoute)
+app.use('/',playerRoute)
 
 module.exports = app

@@ -1,16 +1,16 @@
 const axios = require('axios')
-
+const config = require('../config.json')
 
 exports.getAllPlayers = async(req,res,next)=>{
     try{
-    const data = await axios.get("https://www.balldontlie.io/api/v1/players?search=LeBron")
+    const data = await axios.get(`${config.apiUrl}/players?search=LeBron`)
     var playerDetails = data.data
     var maxCount = 0
     var minCount = 0
     var playerData
 
     for(let i = 2014;i <= 2020;i++){
-        var playerStatData = await axios.get(`https://www.balldontlie.io/api/v1/season_averages?season=${i}&player_ids[]=237`)
+        var playerStatData = await axios.get(`${config.apiUrl}/season_averages?season=${i}&player_ids[]=237`)
         var overAllStats = playerStatData.data.data[0]
         if(typeof overAllStats !== "undefined"){
             playerData = 1
